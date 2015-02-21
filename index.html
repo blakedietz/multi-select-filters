@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	    <title>Multi Select Example</title>
+	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js"></script>
+	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js"></script>
+	    <script type="text/javascript" src="./example.js"></script>
+	</head>
+
+	<body ng-app="exampleApplication" ng-controller="selectionController">
+
+		<!-- Template for single selection directive -->
+	    <script type="text/ng-template" id="selection-directive.tpl.html">
+	       <div>
+			    <select name="" id=""
+			    		ng-model="selectedItem"
+			    		ng-options="selectable.name for selectable in selectableItems"
+			    		ng-change="changeHandler(selectedItem, currentItem)">
+			        <option value="">
+			            {{selectedItem.name}}
+				    </option>
+				</select>
+	    		<button ng-click="removeHandler(selectedItem)">Remove</button>
+			</div>
+	    </script>
+
+		<div
+			ng-repeat="selectedItem in selectedItems"
+			selected-item="selectedItem"
+			selectable-items="selectableItems"
+			change-handler="replaceItemInSelectedItemsWithNewlySelectedItem"
+			remove-handler="removeCurrentSelection"
+		>
+		</div>
+
+		<div ng-show="selectableItems.length">
+		    <select name="" id="" ng-model="aSelection" ng-options="selectable.name for selectable in selectableItems" ng-change="selectUnselectedItem(aSelection)">
+		        <option value="">
+		            Select something
+		        </option>
+		    </select>
+		</div>
+	</body>
+
+
+</html>
